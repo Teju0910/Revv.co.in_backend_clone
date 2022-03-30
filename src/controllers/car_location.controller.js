@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const crudController = require("./crud.controller");
 const Car_Location = require("../models/car_location.model");
+const CarModel = require("../models/carModel.model");
 
 router.get("/", async (req, res) => {
   try {
@@ -14,11 +15,39 @@ router.get("/", async (req, res) => {
 });
 router.get("/:locationId", async (req, res) => {
   try {
-    const data = await Car_Location.find({location:req.params.locationId}).populate('car').populate('location').lean().exec();
-    return res.status(200).send({ data });
+    let registeredCars = await Car_Location.find().populate("car");
+
+    let modelsAvailiabe = {};
+
+    registeredCars.forEach((ele) => {
+      if (ele.car.isBooked) {
+        if (modelsAvailiabe[ele.car.model]) {
+          modelsAvailiabe[ele.car.model]--;
+        } else {
+          modelsAvailiabe[ele.car.model] = 0;
+        }
+      } else {
+        if (modelsAvailiabe[ele.car.model]) {
+          modelsAvailiabe[ele.car.model]++;
+        } else {
+          modelsAvailiabe[ele.car.model] = 1;
+        }
+      }
+    });
+    let availiabe = [];
+    let soldout = [];
+
+    for (key in modelsAvailiabe) {
+      if (modelsAvailiabe[key] > 0) {
+        availiabe.push(await CarModel.find({ _id: key }));
+      } else {
+        soldout.push(await CarModel.find({ _id: key }));
+      }
+    }
+    return res.status(200).send({ availiabe, soldout });
   } catch (error) {
     console.log(error);
-    return res.status(500).send(error);
+    return res.status(500).send(error.message);
   }
 });
 

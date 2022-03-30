@@ -1,10 +1,10 @@
 const app = require("./index");
 const connect = require("./configs/db");
-
-app.listen(5656, async () => {
+const PORT =  5000; //5656
+app.listen(PORT, async () => {
     try{
         await connect();
-        console.log("listening on port 5656")
+        console.log(`listening on port ${PORT}`)
     }
     catch(err){
         console.log(err.message);
