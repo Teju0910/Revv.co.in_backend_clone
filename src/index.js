@@ -27,4 +27,13 @@ app.get(
 )
 
 
+const carModelController = require("./controllers/carModel.controller");
+const carController = require("./controllers/car.controller");
+const locationController = require("./controllers/location.controller");
+const carLocationController = require("./controllers/car_location.controller");
+app.use("/car-models", carModelController);
+app.use("/cars", carController);
+app.use("/locations", locationController);
+app.use("/car-locations", carLocationController);
+
 module.exports = app;
