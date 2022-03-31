@@ -6,7 +6,7 @@ const Car = require("../models/car.model");
 router.get("/",crudController.listAll(Car));
 // router.get("/", async(req,res) => {
 //     try {
-//       const data = await Car.find().populate('model').lean().exec();
+//       const data = await Car.find().populate('location').lean().exec();
 //       return res.status(200).send({ data });
 //     } catch (error) {
 //       console.log(error);

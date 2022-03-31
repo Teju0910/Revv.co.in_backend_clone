@@ -7,6 +7,11 @@ const carSchema = new mongoose.Schema(
       ref: "carModel",
       required: true,
     },
+    location:{
+      type:mongoose.Schema.Types.ObjectId,
+      ref:'location',
+      required: true,
+    },
     isBooked: { type: Boolean, default: false },
     lastBooking : {
         type:mongoose.Schema.Types.ObjectId,

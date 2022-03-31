@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { boolean } = require('webidl-conversions');
 const carLocationSchema = new mongoose.Schema({
   location: {
     type: mongoose.Schema.Types.ObjectId,
