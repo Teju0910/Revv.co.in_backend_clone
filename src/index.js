@@ -1,4 +1,5 @@
 const express = require("express");
+const fast2sms = require("fast-two-sms");
 
 const userController = require("./controllers/user.controller")
 const passport = require("./configs/google-oauth")
@@ -26,5 +27,34 @@ app.get(
   }
 )
 
+
+app.post("/sendmessage", (req, res) => {
+  console.log(req.body.number);
+
+  sendMessage(req.body.number,res)
+})
+
+function sendMessage(number,res) {
+
+  let otp = "";
+  for (var i = 0; i < 6; i++) {
+    otp += (Math.floor(Math.random() * (10 - 0)) + 0).toString();
+  }
+  var optios = {
+      authorization: "vjRICqdg1zNLkTS3pHiV8rmxD7ul6cPheM5fOA2s0EtU4oZyFw3K8DXbCmruOiknEvpTafUodHeyhVj9",
+      message: `Your One Time Password for the Revv.in Car booking payment is ${otp}`,
+      numbers: [number]
+  };
+
+  fast2sms.sendMessage(optios)
+      .then((response) => {
+          // console.log(response);
+          res.send("OTP send Sucessfully to your mobile number");
+      })
+      .catch((error) => {
+          // console.log(error);
+          res.send("some error taken place")
+      });
+}
 
 module.exports = app;
