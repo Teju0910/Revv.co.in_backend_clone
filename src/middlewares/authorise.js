@@ -17,6 +17,7 @@ const authorise = (allowedRole) => {
             isPermitted = true;
         }
     })
+    
            // if permitted, he can go ahead
            if(isPermitted){
                return next()

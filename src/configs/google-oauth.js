@@ -6,7 +6,6 @@ const { v4: uuidv4 } = require('uuid');
 require("dotenv").config();
 // const path = require("path");
 
-
 const User = require("../models/user.models")
 
 // let transporter = nodemailer.createTransport({
@@ -17,8 +16,6 @@ const User = require("../models/user.models")
 //       pass: 'Revv@123'
 //   }
 // });
-
-
 passport.use(new GoogleStrategy({
     clientID: "985434999614-9qvb2h5n1g6ire1p1g3mimjnqihn1pkd.apps.googleusercontent.com",
     clientSecret: "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",

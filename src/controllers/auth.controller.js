@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 
 require('dotenv').config();
 const {transporter} = require("../configs/mail");
-const { body, validationResult } = require("express-validator");
+const {validationResult } = require("express-validator");
 
 
 //https://www.npmjs.com/package/jsonwebtoken(creat token)
@@ -14,6 +14,7 @@ const generateToken = (user) => {
 }
 
 const register = async (req, res) => {
+
     try{
         const errors= validationResult(req);
         if (!errors.isEmpty()) {
@@ -30,10 +31,10 @@ const register = async (req, res) => {
             return res.status(400).send({message : "Email already exists" })
         }
 
-      const passw = /^(?=.*\d)(?=.*[a-z])(?=.*[^a-zA-Z0-9])(?!.*\s).{7,15}$/;
-      if (!req.body.password.match(passw)) {
-        return res.status(400).send({message : "Password must be strong" })
-      }
+      // const passw = /^(?=.*\d)(?=.*[a-z])(?=.*[^a-zA-Z0-9])(?!.*\s).{7,15}$/;
+      // if (!req.body.password.match(passw)) {
+      //   return res.status(400).send({message : "Password must be strong" })
+      // }
 
 
         // if new user, create it or allow to register;
@@ -86,8 +87,11 @@ const register = async (req, res) => {
     }
 }
 
-
 const login = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
     try{       
         const user = await User.findOne({email : req.body.email})
         //checked if mail exists
