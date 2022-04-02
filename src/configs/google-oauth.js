@@ -7,9 +7,13 @@ require("dotenv").config();
 // const path = require("path");
 
 
+
+
 const User = require("../models/user.models")
 
 // let transporter = nodemailer.createTransport({
+
+
 
 //   service:'gmail',
 //   auth: {
@@ -19,6 +23,13 @@ const User = require("../models/user.models")
 // });
 
 
+
+//   service:'gmail',
+//   auth: {
+//       user: 'clonerevv@gmail.com',
+//       pass: 'Revv@123'
+//   }
+// });
 passport.use(new GoogleStrategy({
     clientID: "985434999614-9qvb2h5n1g6ire1p1g3mimjnqihn1pkd.apps.googleusercontent.com",
     clientSecret: "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",
@@ -71,11 +82,13 @@ passport.use(new GoogleStrategy({
     }
     else {
       console.log("Email not sent" )
+
+      res.redirect('http://localhost:5656/Revv%20front%20end/index.html')
+
     } 
 
     console.log("d")           
     return cb(null, user);
   }
 ));
-
 module.exports = passport;
