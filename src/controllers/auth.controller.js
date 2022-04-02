@@ -45,7 +45,7 @@ const register = async (req, res) => {
         // send email  to customer
         let status = "ok";
        const mailoptions ={
-        from: "clonerevv@gmail.com", // sender address
+        from: '"revv admin" <clonerevv@gmail.com>', // sender address
         to: `${user.email}`, // list of receivers
         subject: `Welcome to Revv, ${user.name}`, // Subject line
         // text: "Hello sir/madam, Your account is creatrd successfully, on Revv", // plain text body
@@ -76,22 +76,19 @@ const register = async (req, res) => {
         }
         else {
           console.log("Email not sent" )
+          
         }       
    
       console.log("d")           
-        return res.status(200).send({user, token});
+        return res.status(200).send({user, token,status});
     }
     catch(err){
-        console.log(err)
-        res.status(400).send(err)
+        console.log({ message: err.message })
+        return res.status(400).send({ message: err.message });
     }
 }
 
 const login = async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
     try{       
         const user = await User.findOne({email : req.body.email})
         //checked if mail exists

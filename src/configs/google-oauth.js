@@ -68,11 +68,11 @@ passport.use(new GoogleStrategy({
     }
     else {
       console.log("Email not sent" )
+      res.redirect('http://localhost:5656/Revv%20front%20end/index.html')
     } 
 
     console.log("d")           
     return cb(null, user);
   }
 ));
-
 module.exports = passport;

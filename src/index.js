@@ -65,8 +65,12 @@ app.get(
 
   function(req, res) {
     const token = generateToken(req.user)
-    return res.status(200).send({user:req.user, token})
-  }
+    //res.redirect('https://revv-clone-project.netlify.app/')
+ 
+   return res.status(200).send({user:req.user, token})
+  //  .redirect('https://revv-clone-project.netlify.app/')
+  },
+   
 )
 
 
