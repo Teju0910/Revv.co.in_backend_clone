@@ -15,7 +15,9 @@ app.use("/user", userController)
 app.post("/register",register)
 app.post("/login", login)
 
-
+app.get("/", async function(req,res){
+  return res.status(200).send("User");
+})
 app.use("/user", userController);
 
 app.post("/register",
