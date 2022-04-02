@@ -7,8 +7,8 @@ const userSchema = new mongoose.Schema(
         email : { type : String, required : true, unique:true },
         password : {type : String, required : true},
         mobileNumber :{type : Number, required : false},
-        picture :{    data: Buffer, 
-                 contentType: String , required : false},
+        picture :{    type : String
+                , required : false},
         address :{type : String, required : false},
     },
     {
