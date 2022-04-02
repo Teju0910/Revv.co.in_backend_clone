@@ -3,10 +3,12 @@ const router = express.Router();
 const CarModel = require("../models/carModel.model");
 const Car = require('../models/car.model');
 const Location = require('../models/location.model');
+const carModel = require("../models/car.model");
 
 // get information of cars availiable in a location
 router.get("/:locationId/:duration", async (req, res) => {
   try {
+    // console.log('req recv');
     let registeredCars = await Car.find({location:req.params.locationId}).lean().exec();
 
     // console.log(registeredCars);
@@ -114,6 +116,7 @@ router.get("/:locationId/:duration/filters", async (req, res) => {
   }
 });
 
+
 async function getLocationData(locationId){
   try {
      let loc = await Location.findById(locationId).lean().exec();
@@ -179,12 +182,15 @@ function getAvailiables(data){
   
   data.forEach((ele) => {
       if (ele.isBooked) {
+        // console.log('booked',ele.isBooked);
         if (modelsAvailiable[ele.model]) {
           modelsAvailiable[ele.model]--;
         } else {
           modelsAvailiable[ele.model] = 0;
         }
       } else {
+        // console.log("not booked", ele.isBooked);
+
         if (modelsAvailiable[ele.model]) {
           modelsAvailiable[ele.model]++;
         } else {
