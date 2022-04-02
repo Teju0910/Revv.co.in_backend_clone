@@ -1,4 +1,6 @@
 const express = require("express");
+
+const cors = require('cors');
 const fast2sms = require("fast-two-sms");
 
 const userController = require("./controllers/user.controller")
@@ -8,6 +10,11 @@ const {register,login, generateToken} = require("./controllers/auth.controller")
 const User = require("./models/user.models")
 const app = express();
 app.use(express.json());
+app.use(cors());
+app.use("/user", userController)
+app.post("/register",register)
+app.post("/login", login)
+
 
 app.use("/user", userController);
 
@@ -57,6 +64,7 @@ app.post("/login",
 login)
 
 
+
 app.get('/auth/google',
   passport.authenticate('google', { scope: ['profile', 'email'] }));
  
@@ -74,6 +82,17 @@ app.get(
    
 )
 
+
+const carModelController = require("./controllers/carModel.controller");
+const carController = require("./controllers/car.controller");
+const locationController = require("./controllers/location.controller");
+
+const queryController = require('./controllers/query.controller');
+app.use("/car-models", carModelController);
+app.use("/cars", carController);
+app.use("/locations", locationController);
+
+app.use("/q",queryController);
 
 app.post("/sendmessage", (req, res) => {
   console.log(req.body.number);
