@@ -5,7 +5,8 @@ const jwt = require('jsonwebtoken');
 
 require('dotenv').config();
 const {transporter} = require("../configs/mail");
-const { body, validationResult } = require("express-validator");
+
+const {validationResult } = require("express-validator");
 
 
 //https://www.npmjs.com/package/jsonwebtoken(creat token)
@@ -14,6 +15,7 @@ const generateToken = (user) => {
 }
 
 const register = async (req, res) => {
+
     try{
         const errors= validationResult(req);
         if (!errors.isEmpty()) {
@@ -30,10 +32,8 @@ const register = async (req, res) => {
             return res.status(400).send({message : "Email already exists" })
         }
 
-      const passw = /^(?=.*\d)(?=.*[a-z])(?=.*[^a-zA-Z0-9])(?!.*\s).{7,15}$/;
-      if (!req.body.password.match(passw)) {
-        return res.status(400).send({message : "Password must be strong" })
-      }
+
+
 
 
         // if new user, create it or allow to register;
@@ -44,7 +44,7 @@ const register = async (req, res) => {
         // send email  to customer
         let status = "ok";
        const mailoptions ={
-        from: "clonerevv@gmail.com", // sender address
+        from: '"revv admin" <clonerevv@gmail.com>', // sender address
         to: `${user.email}`, // list of receivers
         subject: `Welcome to Revv, ${user.name}`, // Subject line
         // text: "Hello sir/madam, Your account is creatrd successfully, on Revv", // plain text body
@@ -75,16 +75,19 @@ const register = async (req, res) => {
         }
         else {
           console.log("Email not sent" )
+
+          
         }       
    
       console.log("d")           
-        return res.status(200).send({user, token});
+        return res.status(200).send({user, token,status});
     }
     catch(err){
-        console.log(err)
-        res.status(400).send(err)
+        console.log({ message: err.message })
+        return res.status(400).send({ message: err.message });
     }
 }
+
 
 
 const login = async (req, res) => {
