@@ -41,4 +41,5 @@ catch(err){
  req.user = decoded.user;
  return next();
 }
+
 module.exports = authenticate;

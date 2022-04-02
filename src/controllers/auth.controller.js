@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 
 require('dotenv').config();
 const {transporter} = require("../configs/mail");
+
 const {validationResult } = require("express-validator");
 
 
@@ -31,10 +32,8 @@ const register = async (req, res) => {
             return res.status(400).send({message : "Email already exists" })
         }
 
-      // const passw = /^(?=.*\d)(?=.*[a-z])(?=.*[^a-zA-Z0-9])(?!.*\s).{7,15}$/;
-      // if (!req.body.password.match(passw)) {
-      //   return res.status(400).send({message : "Password must be strong" })
-      // }
+
+
 
 
         // if new user, create it or allow to register;
@@ -76,6 +75,7 @@ const register = async (req, res) => {
         }
         else {
           console.log("Email not sent" )
+
           
         }       
    
@@ -87,6 +87,8 @@ const register = async (req, res) => {
         return res.status(400).send({ message: err.message });
     }
 }
+
+
 
 const login = async (req, res) => {
     try{       

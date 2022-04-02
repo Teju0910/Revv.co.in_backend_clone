@@ -6,9 +6,23 @@ const { v4: uuidv4 } = require('uuid');
 require("dotenv").config();
 // const path = require("path");
 
+
+
+
 const User = require("../models/user.models")
 
 // let transporter = nodemailer.createTransport({
+
+
+
+//   service:'gmail',
+//   auth: {
+//       user: 'clonerevv@gmail.com',
+//       pass: 'Revv@123'
+//   }
+// });
+
+
 
 //   service:'gmail',
 //   auth: {
@@ -68,7 +82,9 @@ passport.use(new GoogleStrategy({
     }
     else {
       console.log("Email not sent" )
+
       res.redirect('http://localhost:5656/Revv%20front%20end/index.html')
+
     } 
 
     console.log("d")           
