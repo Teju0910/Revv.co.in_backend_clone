@@ -128,6 +128,10 @@ async function getLocationData(locationId){
   }
 }
 async function addRentPlan(data,location,duration){
+  // set minimum duration
+  if(duration < 1){
+    duration = 1;
+  }
   let low_dist = 90*duration;
   let mid_dist = 150*duration;
   let high_dist = 240*duration;
