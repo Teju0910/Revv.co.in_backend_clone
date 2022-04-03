@@ -61,9 +61,9 @@ body("name")
   })
 
 ,register)
-app.post("/login",
 
-login)
+
+app.post("/login",login)
 
 
 
@@ -76,14 +76,12 @@ app.get(
 
   function(req, res) {
     const token = generateToken(req.user)
-    //res.redirect('https://revv-clone-project.netlify.app/')
+     res.redirect('https://revv-backend-deploy.herokuapp.com/')
  
    return res.status(200).send({user:req.user, token})
   //  .redirect('https://revv-clone-project.netlify.app/')
   },
-   
 )
-
 
 const carModelController = require("./controllers/carModel.controller");
 const carController = require("./controllers/car.controller");
@@ -98,7 +96,6 @@ app.use("/q",queryController);
 
 app.post("/sendmessage", (req, res) => {
   console.log(req.body.number);
-
   sendMessage(req.body.number,res)
 })
 
