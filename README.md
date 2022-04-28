@@ -31,4 +31,3 @@ Backend API for a Revv clone website, built using NodeJS, Express, Mongoose, Mon
 - #### [Satendra Kumar](www.linkedin.com/in/satendra-yadav-5b8067170/)
 - #### [Athul-Ponthen](https://www.linkedin.com/in/athul-ponthen/)
 - #### [Mangidkar-Ketan](https://www.linkedin.com/in/mangidkar-ketan)
-
